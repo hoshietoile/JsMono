@@ -30,23 +30,28 @@ services:
     depends_on:
       - db
 
-  apps:
+  js_apps:
     container_name: js_apps
     build:
-      context: ./apps
+      context: ./js_apps
       dockerfile: Dockerfile
     environment:
       - MONGODB_USER=${USER}
       - MONGODB_PASS=${PASS}
     volumes:
-      - ./apps/frontend:/app/frontend
-      - /app/frontend/app/node_modules
-      - ./apps/backend:/app/backend
-      - /app/backend/app/node_modules
+      - ./js_apps/repo_root:/repo_root
+      - /repo_root/node_modules
+      - /repo_root/apps/frontend/node_modules
+      - /repo_root/apps/backend/node_modules
+      - /repo_root/packages/eslint-config-custom/node_modules
+      - /repo_root/packages/ui/node_modules
+
     tty: true
     ports:
-      - 8000:3000
-      - 3000:3001
+      - 8000:3001
+      - 3000:3000
+      - 3002:3002
+      - 3003:3003
     depends_on:
       - db
     # command: yarn dev

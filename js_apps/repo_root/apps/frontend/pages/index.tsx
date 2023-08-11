@@ -27,6 +27,7 @@ import {
   Td,
   TableCaption
 } from '@chakra-ui/react'
+// import { testUtil } from 'utils'
 const Index: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
@@ -66,6 +67,7 @@ const Index: NextPage = () => {
   }
 
   useEffect(() => {
+    // alert(testUtil("Hello"))
     if (list.data) {
       dispatch(refreshUserList(list.data.fetchUserList))
     }
