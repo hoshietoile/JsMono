@@ -1,0 +1,37 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserDto {
+  _id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  fetchUserList: [UserDto!]!
+}
+
+type Mutation {
+  createSingleUser(input: CreateUserInput!): UserDto!
+  updateSingleUser(input: UpdateUserInput!): UserDto!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  passwordConfirm: String!
+}
+
+input UpdateUserInput {
+  name: String!
+  email: String!
+}

@@ -1,0 +1,67 @@
+version: '3.3'
+
+services:
+  # docker run -dit --rm --network next_nest -v next_nest_data:/data/db --name mongo next_nest_db
+  db:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      - MONGODB_USER=user
+      - MONGODB_PASS=password!
+    volumes:
+      - next_nest_data:/data/db
+    # ports:
+      # - 27017:27017
+
+  # docker run -dit --rm --network next_nest -p 8081:8081 --name client next_nest_dbclient
+  dbclient:
+    image: mongo-express
+    container_name: mongo_express
+    env_file:
+      - ./.env
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+      - ME_CONFIG_BASICAUTH_USERNAME=user
+      - ME_CONFIG_BASICAUTH_PASSWORD=password!
+    # links:
+      # - db:mongo
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+    
+  # docker run -dit --rm -p 8000:3000 -v "$(pwd)/app/:/app" --name frontend --network next_nest next_nest_frontend
+  frontend:
+    container_name: next
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - MONGODB_USER=${USER}
+      - MONGODB_PASS=${PASS}
+    volumes:
+      - ./frontend/app:/app
+      - /app/node_modules
+    tty: true
+    ports:
+      - 8000:3000
+    command: yarn dev
+    
+  # docker run -dit --rm -p 3000:3000 -v "$(pwd)/app/:/app" --name backend --network next_nest next_nest_backend
+  backend:
+    container_name: nest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend/app:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    command: yarn start:dev
+
+volumes:
+  next_nest_data:

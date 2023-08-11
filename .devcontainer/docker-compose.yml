@@ -1,0 +1,7 @@
+services:
+  frontend:
+    volumes:
+      - .:/app:cached
+  backend:
+    volumes:
+      - .:/app:cached

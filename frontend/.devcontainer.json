@@ -1,0 +1,10 @@
+{
+  "name": "Frontend",
+  "dockerComposeFile": [
+    "./../docker-compose.yml",
+    "./../.devcontainer/docker-compose.yml"
+  ],
+  "service": "frontend",
+  "workspaceFolder": "/app",
+  "shutdownAction": "none"
+}

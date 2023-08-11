@@ -1,0 +1,6 @@
+query FetchUserList {
+  fetchUserList {
+    name
+    email
+  }
+}
