@@ -2,6 +2,3 @@ services:
   js_apps:
     volumes:
       - .:/repo_root:cached
-  # backend:
-  #   volumes:
-  #     - .:/app:cached

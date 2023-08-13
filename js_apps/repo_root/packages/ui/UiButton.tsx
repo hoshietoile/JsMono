@@ -2,6 +2,6 @@
 
 import * as React from "react";
 
-export const Button = () => {
+export const UiButton = () => {
   return <button onClick={() => alert("boop")}>Boop</button>;
 };

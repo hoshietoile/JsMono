@@ -28,6 +28,7 @@ import {
   TableCaption
 } from '@chakra-ui/react'
 // import { testUtil } from 'utils'
+import { UiButton} from 'ui'
 const Index: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [name, setName] = useState<string>('')
@@ -75,6 +76,10 @@ const Index: NextPage = () => {
 
   return (
     <div className={styles.index}>
+      <table>
+        <tr>hoshi</tr>
+      </table>
+      <UiButton>Test</UiButton>
       <Box w="100%" p={4} color="white" borderWidth="1px" borderRadius="lg">
         <FormControl id="name" isInvalid={name.length > 10}>
           <FormLabel color="black">Name</FormLabel>
